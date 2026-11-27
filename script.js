@@ -1,4 +1,4 @@
-const objetos = [
+var objetos = [
     { nome: "Garrafa azul", local: "Laboratório 2", categoria: "Acessórios", data: "2026-11-25", descricao: "Tem um adesivo na tampa." },
     { nome: "Estojo preto", local: "Biblioteca", categoria: "Material escolar", data: "2026-11-26", descricao: "Fecho vermelho." }
 ];
@@ -19,6 +19,8 @@ function mostrarObjetos() {
         <h3>${objeto.nome}</h3>
         <p class="detalhes">${objeto.local} - ${dataFormatada}</p>
         <p>${objeto.descricao}</p>
+        <button onclick="deletar('${objeto.nome}')">Deletar</button>
+        <button onclick="atualizar('${objeto.nome}')">Atualizar</button>
     </li>
         `;
 
@@ -56,6 +58,26 @@ function cadastrarObjetos(){
     document.getElementById("categoria").value = "";
     document.getElementById("data").value = "";
     document.getElementById("descricao").value = "";
+
+}
+
+function deletar(nome){
+
+    var querDeletar = confirm("Você deseja mesmo deletar o objeto" + " '" + nome + "' " + "?");
+    if(querDeletar === false){
+        return;
+    }
+
+        objetos = objetos.filter((item) => item.nome !== nome);
+        mostrarObjetos();
+
+}
+
+function atualizar(nome){
+
+    var i = objetos.findIndex(item => item.nome === nome);
+
+    document.getElementById("nome").value = objetos[i].nome
 
 }
 
